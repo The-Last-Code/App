@@ -68,13 +68,12 @@ class Email
     {
         if (isset($_POST["novaSenha"])) 
         { 
-        $novaSenha = password_hash ($_POST['snh_cientista'],PASSWORD_DEFAULT);
-
+        $novaSenha = mb_strimwidth(md5(addslashes($_POST['novaSenha'])), 0, 10);
         if($this->em->novaSenha($novaSenha,$_SESSION['recuperaEmail'])==true){
             echo "<SCRIPT> //not showing me this
-      alert('Senha trocada com sucesso')
-      window.location.replace('../../app/View/LoginCadastro.php');
-      </SCRIPT>";
+            alert('Senha trocada com sucesso')
+            window.location.replace('../../app/View/LoginCadastro.php');
+            </SCRIPT>";
             //echo 'deu';exit;
          }
         }

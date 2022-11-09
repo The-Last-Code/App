@@ -15,7 +15,7 @@ class CadastroController{
     $email_cientista =addslashes( $_POST["email_cientista"]);
     $email_alternativo_cientista =addslashes( $_POST["email_alternativo_cientista"]);
     $lattes_cientista =addslashes( $_POST["lattes_cientista"]);
-    $snh_cientista = password_hash ($_POST['snh_cientista'],PASSWORD_DEFAULT);
+    $snh_cientista = mb_strimwidth(md5(addslashes($_POST['novaSenha'])), 0, 10);
     
     $user = new User($nom_cientista, $cpf_cientista, $dtn_cientista
     ,$email_cientista, $email_alternativo_cientista, $lattes_cientista, $snh_cientista  );
@@ -42,7 +42,7 @@ class CadastroController{
   {
     if (isset($_POST['cpf_cientista'])){
       $nom_cientista = $_POST["cpf_cientista"];
-      $snh_cientista = password_hash ($_POST['snh_cientista'],PASSWORD_DEFAULT);
+      $snh_cientista = mb_strimwidth(md5(addslashes($_POST['novaSenha'])), 0, 10);
     
       $log=new Login();
          if($log->Login($nom_cientista,$snh_cientista)==true)
